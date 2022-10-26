@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pdrb', function (Blueprint $table) {
             $table->increments('id');
-            $table->kategori_id('kategori_id')->constrained('kategoris')->onDelete('cascade');
+            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
             $table->float('a')->nullable(); //Pertanian dan Kehutanan
             $table->float('b')->nullable(); //Pertambangan dan Penggalian
             $table->float('c')->nullable(); //Industri

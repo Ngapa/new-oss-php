@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('inflasi', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
             $table->float('sembako')->nullable(); //Makanan, Minuman, Tembakau
             $table->float('sandang')->nullable(); //Pakaian dan Alas Kaki
             $table->float('perumahan')->nullable(); //Perumahan, Air, Listrik, BB Lain

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->float('tpak')->nullable();
             $table->float('tkk')->nullable();
             $table->float('tpt')->nullable();
+            $table->float('lainnya')->nullable();
             $table->enum('gender', ['lk', 'pr']);
             $table->date('created');
         });

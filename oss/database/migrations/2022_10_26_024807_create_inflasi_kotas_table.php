@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inflasi_kota', function (Blueprint $table) {
             $table->id();
-            $table->enum('nama_kota', ['cilacap', 'purwokerto', 'kudus', 'surakarta', 'semarang', 'tegal', 'nasional'])->default(['cilacap']);
+            $table->enum('nama_kota', ['cilacap', 'purwokerto', 'kudus', 'surakarta', 'semarang', 'tegal', 'nasional']);
             $table->float('mtom')->nullable();
             $table->float('ytod')->nullable();
             $table->float('ytoy')->nullable();

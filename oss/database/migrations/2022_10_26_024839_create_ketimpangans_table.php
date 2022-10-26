@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ketimpangan', function (Blueprint $table) {
             $table->id();
-            $table->enum('pddk', ['rendah', 'sedang', 'tinggi'])->nullable()->default(['rendah']);
+            $table->enum('pddk', ['rendah', 'sedang', 'tinggi']);
             $table->float('jumlah')->nullable();
             $table->date('created');
         });
