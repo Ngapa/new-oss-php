@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::resource('inflasis', App\Http\Controllers\InflasiController::class);
+Route::resource('inflasi-klmpk-pengeluarans', App\Http\Controllers\InflasiKlmpkPengeluaranController::class);
+Route::resource('kategoris', App\Http\Controllers\KategoriController::class);
