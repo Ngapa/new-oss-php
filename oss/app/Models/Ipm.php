@@ -3,10 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Ipm extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="Ipm",
+ *      required={},
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class Ipm extends Model
 {
-    public $table = 'ipm';
+    use HasFactory;    public $table = 'ipm';
 
     public $fillable = [
         'uhh',
@@ -14,12 +35,11 @@ class Ipm extends Model
         'hls',
         'ppp',
         'ipm',
-        'pertumbuhan',
-        'created'
+        'pertumbuhan'
     ];
 
     protected $casts = [
-        'created' => 'date'
+        
     ];
 
     public static $rules = [
@@ -29,7 +49,8 @@ class Ipm extends Model
         'ppp' => 'nullable',
         'ipm' => 'nullable',
         'pertumbuhan' => 'nullable',
-        'created' => 'required'
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     

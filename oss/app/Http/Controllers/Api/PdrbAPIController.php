@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class PdrbAPIController
+ * Class PdrbController
  */
+
 class PdrbAPIController extends AppBaseController
 {
     private PdrbRepository $pdrbRepository;
@@ -23,8 +24,32 @@ class PdrbAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Pdrbs.
-     * GET|HEAD /pdrbs
+     * @OA\Get(
+     *      path="/pdrbs",
+     *      summary="getPdrbList",
+     *      tags={"Pdrb"},
+     *      description="Get all Pdrbs",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Pdrb")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class PdrbAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Pdrb in storage.
-     * POST /pdrbs
+     * @OA\Post(
+     *      path="/pdrbs",
+     *      summary="createPdrb",
+     *      tags={"Pdrb"},
+     *      description="Create Pdrb",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Pdrb")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Pdrb"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePdrbAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class PdrbAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Pdrb.
-     * GET|HEAD /pdrbs/{id}
+     * @OA\Get(
+     *      path="/pdrbs/{id}",
+     *      summary="getPdrbItem",
+     *      tags={"Pdrb"},
+     *      description="Get Pdrb",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Pdrb",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Pdrb"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class PdrbAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Pdrb in storage.
-     * PUT/PATCH /pdrbs/{id}
+     * @OA\Put(
+     *      path="/pdrbs/{id}",
+     *      summary="updatePdrb",
+     *      tags={"Pdrb"},
+     *      description="Update Pdrb",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Pdrb",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Pdrb")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Pdrb"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePdrbAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class PdrbAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Pdrb from storage.
-     * DELETE /pdrbs/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/pdrbs/{id}",
+     *      summary="deletePdrb",
+     *      tags={"Pdrb"},
+     *      description="Delete Pdrb",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Pdrb",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

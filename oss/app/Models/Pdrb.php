@@ -3,10 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Pdrb extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="Pdrb",
+ *      required={"kategori_id"},
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class Pdrb extends Model
 {
-    public $table = 'pdrb';
+    use HasFactory;    public $table = 'pdrb';
 
     public $fillable = [
         'kategori_id',
@@ -27,12 +48,11 @@ class Pdrb extends Model
         'p',
         'q',
         'r_s_t_u',
-        'total_pdrb',
-        'created'
+        'total_pdrb'
     ];
 
     protected $casts = [
-        'created' => 'date'
+        
     ];
 
     public static $rules = [
@@ -55,7 +75,8 @@ class Pdrb extends Model
         'q' => 'nullable',
         'r_s_t_u' => 'nullable',
         'total_pdrb' => 'nullable',
-        'created' => 'required'
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     public function kategori(): \Illuminate\Database\Eloquent\Relations\BelongsTo

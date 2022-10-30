@@ -13,8 +13,7 @@ class IpmRepository extends BaseRepository
         'hls',
         'ppp',
         'ipm',
-        'pertumbuhan',
-        'created'
+        'pertumbuhan'
     ];
 
     public function getFieldsSearchable(): array

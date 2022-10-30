@@ -34,7 +34,7 @@ return new class extends Migration
             $table->float('q')->nullable(); //Jasa Kesehatan dan Kegiatan Sosial
             $table->float('r_s_t_u')->nullable(); //Jasa Lainnya
             $table->float('total_pdrb')->nullable(); 
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

@@ -9,8 +9,7 @@ class PengangguranRepository extends BaseRepository
 {
     protected $fieldSearchable = [
         'tpak',
-        'tpt',
-        'created'
+        'tpt'
     ];
 
     public function getFieldsSearchable(): array

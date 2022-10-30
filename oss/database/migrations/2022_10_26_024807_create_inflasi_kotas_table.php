@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('ytod')->nullable();
             $table->float('ytoy')->nullable();
             $table->float('total')->nullable();
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

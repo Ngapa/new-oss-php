@@ -17,8 +17,7 @@ class TenagaKerjaRepository extends BaseRepository
         'tkk',
         'tpt',
         'lainnya',
-        'gender',
-        'created'
+        'gender'
     ];
 
     public function getFieldsSearchable(): array

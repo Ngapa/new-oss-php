@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class InflasiKlmpkPengeluaranAPIController
+ * Class InflasiKlmpkPengeluaranController
  */
+
 class InflasiKlmpkPengeluaranAPIController extends AppBaseController
 {
     private InflasiKlmpkPengeluaranRepository $inflasiKlmpkPengeluaranRepository;
@@ -23,8 +24,32 @@ class InflasiKlmpkPengeluaranAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the InflasiKlmpkPengeluarans.
-     * GET|HEAD /inflasi-klmpk-pengeluarans
+     * @OA\Get(
+     *      path="/inflasi-klmpk-pengeluarans",
+     *      summary="getInflasiKlmpkPengeluaranList",
+     *      tags={"InflasiKlmpkPengeluaran"},
+     *      description="Get all InflasiKlmpkPengeluarans",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/InflasiKlmpkPengeluaran")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class InflasiKlmpkPengeluaranAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created InflasiKlmpkPengeluaran in storage.
-     * POST /inflasi-klmpk-pengeluarans
+     * @OA\Post(
+     *      path="/inflasi-klmpk-pengeluarans",
+     *      summary="createInflasiKlmpkPengeluaran",
+     *      tags={"InflasiKlmpkPengeluaran"},
+     *      description="Create InflasiKlmpkPengeluaran",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/InflasiKlmpkPengeluaran")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/InflasiKlmpkPengeluaran"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateInflasiKlmpkPengeluaranAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class InflasiKlmpkPengeluaranAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified InflasiKlmpkPengeluaran.
-     * GET|HEAD /inflasi-klmpk-pengeluarans/{id}
+     * @OA\Get(
+     *      path="/inflasi-klmpk-pengeluarans/{id}",
+     *      summary="getInflasiKlmpkPengeluaranItem",
+     *      tags={"InflasiKlmpkPengeluaran"},
+     *      description="Get InflasiKlmpkPengeluaran",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of InflasiKlmpkPengeluaran",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/InflasiKlmpkPengeluaran"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class InflasiKlmpkPengeluaranAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified InflasiKlmpkPengeluaran in storage.
-     * PUT/PATCH /inflasi-klmpk-pengeluarans/{id}
+     * @OA\Put(
+     *      path="/inflasi-klmpk-pengeluarans/{id}",
+     *      summary="updateInflasiKlmpkPengeluaran",
+     *      tags={"InflasiKlmpkPengeluaran"},
+     *      description="Update InflasiKlmpkPengeluaran",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of InflasiKlmpkPengeluaran",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/InflasiKlmpkPengeluaran")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/InflasiKlmpkPengeluaran"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateInflasiKlmpkPengeluaranAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class InflasiKlmpkPengeluaranAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified InflasiKlmpkPengeluaran from storage.
-     * DELETE /inflasi-klmpk-pengeluarans/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/inflasi-klmpk-pengeluarans/{id}",
+     *      summary="deleteInflasiKlmpkPengeluaran",
+     *      tags={"InflasiKlmpkPengeluaran"},
+     *      description="Delete InflasiKlmpkPengeluaran",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of InflasiKlmpkPengeluaran",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

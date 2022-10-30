@@ -20,8 +20,7 @@ class InflasiRepository extends BaseRepository
         'pendidikan',
         'penyedia_pangan',
         'perawatan_pribadi',
-        'total_inflasi',
-        'created'
+        'total_inflasi'
     ];
 
     public function getFieldsSearchable(): array

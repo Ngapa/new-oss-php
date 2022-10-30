@@ -28,7 +28,7 @@ return new class extends Migration
             $table->float('penyedia_pangan')->nullable(); //Penyedia makanan, minuman / restoran
             $table->float('perawatan_pribadi')->nullable(); //Perawatan Pribadi dan Jasa Lainnya
             $table->float('total_inflasi')->nullable(); //Total Inflasi
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

@@ -3,10 +3,45 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Kategori extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="Kategori",
+ *      required={"nama","deskripsi"},
+ *      @OA\Property(
+ *          property="nama",
+ *          description="",
+ *          readOnly=false,
+ *          nullable=false,
+ *          type="string",
+ *      ),
+ *      @OA\Property(
+ *          property="deskripsi",
+ *          description="",
+ *          readOnly=false,
+ *          nullable=false,
+ *          type="string",
+ *      ),
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class Kategori extends Model
 {
-    public $table = 'kategoris';
+    use HasFactory;    public $table = 'kategoris';
 
     public $fillable = [
         'nama',

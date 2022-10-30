@@ -3,23 +3,49 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class InflasiKota extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="InflasiKota",
+ *      required={"nama_kota"},
+ *      @OA\Property(
+ *          property="nama_kota",
+ *          description="",
+ *          readOnly=false,
+ *          nullable=false,
+ *          type="string",
+ *      ),
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class InflasiKota extends Model
 {
-    public $table = 'inflasi_kota';
+    use HasFactory;    public $table = 'inflasi_kota';
 
     public $fillable = [
         'nama_kota',
         'mtom',
         'ytod',
         'ytoy',
-        'total',
-        'created'
+        'total'
     ];
 
     protected $casts = [
-        'nama_kota' => 'string',
-        'created' => 'date'
+        'nama_kota' => 'string'
     ];
 
     public static $rules = [
@@ -28,7 +54,8 @@ class InflasiKota extends Model
         'ytod' => 'nullable',
         'ytoy' => 'nullable',
         'total' => 'nullable',
-        'created' => 'required'
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     

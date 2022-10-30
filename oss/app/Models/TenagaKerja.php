@@ -3,10 +3,38 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class TenagaKerja extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="TenagaKerja",
+ *      required={"gender"},
+ *      @OA\Property(
+ *          property="gender",
+ *          description="",
+ *          readOnly=false,
+ *          nullable=false,
+ *          type="string",
+ *      ),
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class TenagaKerja extends Model
 {
-    public $table = 'tenaga_kerja';
+    use HasFactory;    public $table = 'tenaga_kerja';
 
     public $fillable = [
         'angkatan_kerja',
@@ -18,13 +46,11 @@ class TenagaKerja extends Model
         'tkk',
         'tpt',
         'lainnya',
-        'gender',
-        'created'
+        'gender'
     ];
 
     protected $casts = [
-        'gender' => 'string',
-        'created' => 'date'
+        'gender' => 'string'
     ];
 
     public static $rules = [
@@ -38,7 +64,8 @@ class TenagaKerja extends Model
         'tpt' => 'nullable',
         'lainnya' => 'nullable',
         'gender' => 'required|string',
-        'created' => 'required'
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     

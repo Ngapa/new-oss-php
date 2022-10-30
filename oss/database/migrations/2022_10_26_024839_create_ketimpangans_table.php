@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->enum('pddk', ['rendah', 'sedang', 'tinggi']);
             $table->float('jumlah')->nullable();
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

@@ -12,8 +12,7 @@ class KemiskinanRepository extends BaseRepository
         'p0',
         'p1',
         'p2',
-        'gk',
-        'created'
+        'gk'
     ];
 
     public function getFieldsSearchable(): array

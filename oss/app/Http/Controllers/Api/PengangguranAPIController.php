@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class PengangguranAPIController
+ * Class PengangguranController
  */
+
 class PengangguranAPIController extends AppBaseController
 {
     private PengangguranRepository $pengangguranRepository;
@@ -23,8 +24,32 @@ class PengangguranAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Penganggurans.
-     * GET|HEAD /penganggurans
+     * @OA\Get(
+     *      path="/penganggurans",
+     *      summary="getPengangguranList",
+     *      tags={"Pengangguran"},
+     *      description="Get all Penganggurans",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Pengangguran")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class PengangguranAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Pengangguran in storage.
-     * POST /penganggurans
+     * @OA\Post(
+     *      path="/penganggurans",
+     *      summary="createPengangguran",
+     *      tags={"Pengangguran"},
+     *      description="Create Pengangguran",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Pengangguran")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Pengangguran"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePengangguranAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class PengangguranAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Pengangguran.
-     * GET|HEAD /penganggurans/{id}
+     * @OA\Get(
+     *      path="/penganggurans/{id}",
+     *      summary="getPengangguranItem",
+     *      tags={"Pengangguran"},
+     *      description="Get Pengangguran",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Pengangguran",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Pengangguran"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class PengangguranAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Pengangguran in storage.
-     * PUT/PATCH /penganggurans/{id}
+     * @OA\Put(
+     *      path="/penganggurans/{id}",
+     *      summary="updatePengangguran",
+     *      tags={"Pengangguran"},
+     *      description="Update Pengangguran",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Pengangguran",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Pengangguran")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Pengangguran"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePengangguranAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class PengangguranAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Pengangguran from storage.
-     * DELETE /penganggurans/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/penganggurans/{id}",
+     *      summary="deletePengangguran",
+     *      tags={"Pengangguran"},
+     *      description="Delete Pengangguran",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Pengangguran",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

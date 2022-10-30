@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class KetimpanganAPIController
+ * Class KetimpanganController
  */
+
 class KetimpanganAPIController extends AppBaseController
 {
     private KetimpanganRepository $ketimpanganRepository;
@@ -23,8 +24,32 @@ class KetimpanganAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Ketimpangans.
-     * GET|HEAD /ketimpangans
+     * @OA\Get(
+     *      path="/ketimpangans",
+     *      summary="getKetimpanganList",
+     *      tags={"Ketimpangan"},
+     *      description="Get all Ketimpangans",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Ketimpangan")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class KetimpanganAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Ketimpangan in storage.
-     * POST /ketimpangans
+     * @OA\Post(
+     *      path="/ketimpangans",
+     *      summary="createKetimpangan",
+     *      tags={"Ketimpangan"},
+     *      description="Create Ketimpangan",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Ketimpangan")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Ketimpangan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateKetimpanganAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class KetimpanganAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Ketimpangan.
-     * GET|HEAD /ketimpangans/{id}
+     * @OA\Get(
+     *      path="/ketimpangans/{id}",
+     *      summary="getKetimpanganItem",
+     *      tags={"Ketimpangan"},
+     *      description="Get Ketimpangan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Ketimpangan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Ketimpangan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class KetimpanganAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Ketimpangan in storage.
-     * PUT/PATCH /ketimpangans/{id}
+     * @OA\Put(
+     *      path="/ketimpangans/{id}",
+     *      summary="updateKetimpangan",
+     *      tags={"Ketimpangan"},
+     *      description="Update Ketimpangan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Ketimpangan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Ketimpangan")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Ketimpangan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateKetimpanganAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class KetimpanganAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Ketimpangan from storage.
-     * DELETE /ketimpangans/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/ketimpangans/{id}",
+     *      summary="deleteKetimpangan",
+     *      tags={"Ketimpangan"},
+     *      description="Delete Ketimpangan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Ketimpangan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

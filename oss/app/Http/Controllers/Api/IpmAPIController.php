@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class IpmAPIController
+ * Class IpmController
  */
+
 class IpmAPIController extends AppBaseController
 {
     private IpmRepository $ipmRepository;
@@ -23,8 +24,32 @@ class IpmAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Ipms.
-     * GET|HEAD /ipms
+     * @OA\Get(
+     *      path="/ipms",
+     *      summary="getIpmList",
+     *      tags={"Ipm"},
+     *      description="Get all Ipms",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Ipm")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class IpmAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Ipm in storage.
-     * POST /ipms
+     * @OA\Post(
+     *      path="/ipms",
+     *      summary="createIpm",
+     *      tags={"Ipm"},
+     *      description="Create Ipm",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Ipm")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Ipm"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateIpmAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class IpmAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Ipm.
-     * GET|HEAD /ipms/{id}
+     * @OA\Get(
+     *      path="/ipms/{id}",
+     *      summary="getIpmItem",
+     *      tags={"Ipm"},
+     *      description="Get Ipm",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Ipm",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Ipm"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class IpmAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Ipm in storage.
-     * PUT/PATCH /ipms/{id}
+     * @OA\Put(
+     *      path="/ipms/{id}",
+     *      summary="updateIpm",
+     *      tags={"Ipm"},
+     *      description="Update Ipm",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Ipm",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Ipm")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Ipm"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateIpmAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class IpmAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Ipm from storage.
-     * DELETE /ipms/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/ipms/{id}",
+     *      summary="deleteIpm",
+     *      tags={"Ipm"},
+     *      description="Delete Ipm",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Ipm",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

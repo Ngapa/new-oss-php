@@ -26,8 +26,7 @@ class PdrbRepository extends BaseRepository
         'p',
         'q',
         'r_s_t_u',
-        'total_pdrb',
-        'created'
+        'total_pdrb'
     ];
 
     public function getFieldsSearchable(): array

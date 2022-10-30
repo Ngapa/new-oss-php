@@ -24,8 +24,7 @@ class PendudukRepository extends BaseRepository
         'n',
         'o',
         'p',
-        'total',
-        'created'
+        'total'
     ];
 
     public function getFieldsSearchable(): array

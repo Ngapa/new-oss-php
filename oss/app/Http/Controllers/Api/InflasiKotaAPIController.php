@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class InflasiKotaAPIController
+ * Class InflasiKotaController
  */
+
 class InflasiKotaAPIController extends AppBaseController
 {
     private InflasiKotaRepository $inflasiKotaRepository;
@@ -23,8 +24,32 @@ class InflasiKotaAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the InflasiKotas.
-     * GET|HEAD /inflasi-kotas
+     * @OA\Get(
+     *      path="/inflasi-kotas",
+     *      summary="getInflasiKotaList",
+     *      tags={"InflasiKota"},
+     *      description="Get all InflasiKotas",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/InflasiKota")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class InflasiKotaAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created InflasiKota in storage.
-     * POST /inflasi-kotas
+     * @OA\Post(
+     *      path="/inflasi-kotas",
+     *      summary="createInflasiKota",
+     *      tags={"InflasiKota"},
+     *      description="Create InflasiKota",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/InflasiKota")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/InflasiKota"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateInflasiKotaAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class InflasiKotaAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified InflasiKota.
-     * GET|HEAD /inflasi-kotas/{id}
+     * @OA\Get(
+     *      path="/inflasi-kotas/{id}",
+     *      summary="getInflasiKotaItem",
+     *      tags={"InflasiKota"},
+     *      description="Get InflasiKota",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of InflasiKota",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/InflasiKota"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class InflasiKotaAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified InflasiKota in storage.
-     * PUT/PATCH /inflasi-kotas/{id}
+     * @OA\Put(
+     *      path="/inflasi-kotas/{id}",
+     *      summary="updateInflasiKota",
+     *      tags={"InflasiKota"},
+     *      description="Update InflasiKota",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of InflasiKota",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/InflasiKota")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/InflasiKota"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateInflasiKotaAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class InflasiKotaAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified InflasiKota from storage.
-     * DELETE /inflasi-kotas/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/inflasi-kotas/{id}",
+     *      summary="deleteInflasiKota",
+     *      tags={"InflasiKota"},
+     *      description="Delete InflasiKota",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of InflasiKota",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

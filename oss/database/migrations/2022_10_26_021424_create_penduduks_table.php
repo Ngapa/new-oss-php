@@ -32,7 +32,7 @@ return new class extends Migration
             $table->integer('o'); //70-74 Tahun
             $table->integer('p'); //75+ Tahun
             $table->integer('total');
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

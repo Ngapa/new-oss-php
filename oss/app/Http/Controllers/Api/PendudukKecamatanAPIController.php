@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class PendudukKecamatanAPIController
+ * Class PendudukKecamatanController
  */
+
 class PendudukKecamatanAPIController extends AppBaseController
 {
     private PendudukKecamatanRepository $pendudukKecamatanRepository;
@@ -23,8 +24,32 @@ class PendudukKecamatanAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the PendudukKecamatans.
-     * GET|HEAD /penduduk-kecamatans
+     * @OA\Get(
+     *      path="/penduduk-kecamatans",
+     *      summary="getPendudukKecamatanList",
+     *      tags={"PendudukKecamatan"},
+     *      description="Get all PendudukKecamatans",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/PendudukKecamatan")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class PendudukKecamatanAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created PendudukKecamatan in storage.
-     * POST /penduduk-kecamatans
+     * @OA\Post(
+     *      path="/penduduk-kecamatans",
+     *      summary="createPendudukKecamatan",
+     *      tags={"PendudukKecamatan"},
+     *      description="Create PendudukKecamatan",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/PendudukKecamatan")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/PendudukKecamatan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePendudukKecamatanAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class PendudukKecamatanAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified PendudukKecamatan.
-     * GET|HEAD /penduduk-kecamatans/{id}
+     * @OA\Get(
+     *      path="/penduduk-kecamatans/{id}",
+     *      summary="getPendudukKecamatanItem",
+     *      tags={"PendudukKecamatan"},
+     *      description="Get PendudukKecamatan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of PendudukKecamatan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/PendudukKecamatan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class PendudukKecamatanAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified PendudukKecamatan in storage.
-     * PUT/PATCH /penduduk-kecamatans/{id}
+     * @OA\Put(
+     *      path="/penduduk-kecamatans/{id}",
+     *      summary="updatePendudukKecamatan",
+     *      tags={"PendudukKecamatan"},
+     *      description="Update PendudukKecamatan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of PendudukKecamatan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/PendudukKecamatan")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/PendudukKecamatan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePendudukKecamatanAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class PendudukKecamatanAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified PendudukKecamatan from storage.
-     * DELETE /penduduk-kecamatans/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/penduduk-kecamatans/{id}",
+     *      summary="deletePendudukKecamatan",
+     *      tags={"PendudukKecamatan"},
+     *      description="Delete PendudukKecamatan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of PendudukKecamatan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

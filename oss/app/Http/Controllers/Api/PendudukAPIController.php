@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class PendudukAPIController
+ * Class PendudukController
  */
+
 class PendudukAPIController extends AppBaseController
 {
     private PendudukRepository $pendudukRepository;
@@ -23,8 +24,32 @@ class PendudukAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Penduduks.
-     * GET|HEAD /penduduks
+     * @OA\Get(
+     *      path="/penduduks",
+     *      summary="getPendudukList",
+     *      tags={"Penduduk"},
+     *      description="Get all Penduduks",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Penduduk")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class PendudukAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Penduduk in storage.
-     * POST /penduduks
+     * @OA\Post(
+     *      path="/penduduks",
+     *      summary="createPenduduk",
+     *      tags={"Penduduk"},
+     *      description="Create Penduduk",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Penduduk")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Penduduk"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreatePendudukAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class PendudukAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Penduduk.
-     * GET|HEAD /penduduks/{id}
+     * @OA\Get(
+     *      path="/penduduks/{id}",
+     *      summary="getPendudukItem",
+     *      tags={"Penduduk"},
+     *      description="Get Penduduk",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Penduduk",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Penduduk"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class PendudukAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Penduduk in storage.
-     * PUT/PATCH /penduduks/{id}
+     * @OA\Put(
+     *      path="/penduduks/{id}",
+     *      summary="updatePenduduk",
+     *      tags={"Penduduk"},
+     *      description="Update Penduduk",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Penduduk",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Penduduk")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Penduduk"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdatePendudukAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class PendudukAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Penduduk from storage.
-     * DELETE /penduduks/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/penduduks/{id}",
+     *      summary="deletePenduduk",
+     *      tags={"Penduduk"},
+     *      description="Delete Penduduk",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Penduduk",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

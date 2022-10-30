@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class InflasiAPIController
+ * Class InflasiController
  */
+
 class InflasiAPIController extends AppBaseController
 {
     private InflasiRepository $inflasiRepository;
@@ -23,8 +24,32 @@ class InflasiAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Inflasis.
-     * GET|HEAD /inflasis
+     * @OA\Get(
+     *      path="/inflasis",
+     *      summary="getInflasiList",
+     *      tags={"Inflasi"},
+     *      description="Get all Inflasis",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Inflasi")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class InflasiAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Inflasi in storage.
-     * POST /inflasis
+     * @OA\Post(
+     *      path="/inflasis",
+     *      summary="createInflasi",
+     *      tags={"Inflasi"},
+     *      description="Create Inflasi",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Inflasi")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Inflasi"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateInflasiAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class InflasiAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Inflasi.
-     * GET|HEAD /inflasis/{id}
+     * @OA\Get(
+     *      path="/inflasis/{id}",
+     *      summary="getInflasiItem",
+     *      tags={"Inflasi"},
+     *      description="Get Inflasi",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Inflasi",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Inflasi"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class InflasiAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Inflasi in storage.
-     * PUT/PATCH /inflasis/{id}
+     * @OA\Put(
+     *      path="/inflasis/{id}",
+     *      summary="updateInflasi",
+     *      tags={"Inflasi"},
+     *      description="Update Inflasi",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Inflasi",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Inflasi")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Inflasi"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateInflasiAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class InflasiAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Inflasi from storage.
-     * DELETE /inflasis/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/inflasis/{id}",
+     *      summary="deleteInflasi",
+     *      tags={"Inflasi"},
+     *      description="Delete Inflasi",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Inflasi",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

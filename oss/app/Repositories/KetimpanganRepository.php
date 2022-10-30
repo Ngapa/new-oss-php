@@ -9,8 +9,7 @@ class KetimpanganRepository extends BaseRepository
 {
     protected $fieldSearchable = [
         'pddk',
-        'jumlah',
-        'created'
+        'jumlah'
     ];
 
     public function getFieldsSearchable(): array

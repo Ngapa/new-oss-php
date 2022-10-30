@@ -12,8 +12,7 @@ class PendudukKecamatanRepository extends BaseRepository
         'lk',
         'pr',
         'total',
-        'rasio_jk',
-        'created'
+        'rasio_jk'
     ];
 
     public function getFieldsSearchable(): array

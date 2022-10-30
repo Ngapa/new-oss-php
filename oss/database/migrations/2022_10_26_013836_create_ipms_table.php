@@ -21,7 +21,7 @@ return new class extends Migration
             $table->float('ppp')->nullable();
             $table->float('ipm')->nullable();
             $table->float('pertumbuhan')->nullable();
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

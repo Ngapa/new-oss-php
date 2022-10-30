@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class KemiskinanAPIController
+ * Class KemiskinanController
  */
+
 class KemiskinanAPIController extends AppBaseController
 {
     private KemiskinanRepository $kemiskinanRepository;
@@ -23,8 +24,32 @@ class KemiskinanAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Kemiskinans.
-     * GET|HEAD /kemiskinans
+     * @OA\Get(
+     *      path="/kemiskinans",
+     *      summary="getKemiskinanList",
+     *      tags={"Kemiskinan"},
+     *      description="Get all Kemiskinans",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Kemiskinan")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class KemiskinanAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Kemiskinan in storage.
-     * POST /kemiskinans
+     * @OA\Post(
+     *      path="/kemiskinans",
+     *      summary="createKemiskinan",
+     *      tags={"Kemiskinan"},
+     *      description="Create Kemiskinan",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Kemiskinan")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Kemiskinan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateKemiskinanAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class KemiskinanAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Kemiskinan.
-     * GET|HEAD /kemiskinans/{id}
+     * @OA\Get(
+     *      path="/kemiskinans/{id}",
+     *      summary="getKemiskinanItem",
+     *      tags={"Kemiskinan"},
+     *      description="Get Kemiskinan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Kemiskinan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Kemiskinan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class KemiskinanAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Kemiskinan in storage.
-     * PUT/PATCH /kemiskinans/{id}
+     * @OA\Put(
+     *      path="/kemiskinans/{id}",
+     *      summary="updateKemiskinan",
+     *      tags={"Kemiskinan"},
+     *      description="Update Kemiskinan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Kemiskinan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Kemiskinan")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Kemiskinan"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateKemiskinanAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class KemiskinanAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Kemiskinan from storage.
-     * DELETE /kemiskinans/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/kemiskinans/{id}",
+     *      summary="deleteKemiskinan",
+     *      tags={"Kemiskinan"},
+     *      description="Delete Kemiskinan",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Kemiskinan",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

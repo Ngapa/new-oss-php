@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class TenagaKerjaAPIController
+ * Class TenagaKerjaController
  */
+
 class TenagaKerjaAPIController extends AppBaseController
 {
     private TenagaKerjaRepository $tenagaKerjaRepository;
@@ -23,8 +24,32 @@ class TenagaKerjaAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the TenagaKerjas.
-     * GET|HEAD /tenaga-kerjas
+     * @OA\Get(
+     *      path="/tenaga-kerjas",
+     *      summary="getTenagaKerjaList",
+     *      tags={"TenagaKerja"},
+     *      description="Get all TenagaKerjas",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/TenagaKerja")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class TenagaKerjaAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created TenagaKerja in storage.
-     * POST /tenaga-kerjas
+     * @OA\Post(
+     *      path="/tenaga-kerjas",
+     *      summary="createTenagaKerja",
+     *      tags={"TenagaKerja"},
+     *      description="Create TenagaKerja",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/TenagaKerja")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/TenagaKerja"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateTenagaKerjaAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class TenagaKerjaAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified TenagaKerja.
-     * GET|HEAD /tenaga-kerjas/{id}
+     * @OA\Get(
+     *      path="/tenaga-kerjas/{id}",
+     *      summary="getTenagaKerjaItem",
+     *      tags={"TenagaKerja"},
+     *      description="Get TenagaKerja",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of TenagaKerja",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/TenagaKerja"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class TenagaKerjaAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified TenagaKerja in storage.
-     * PUT/PATCH /tenaga-kerjas/{id}
+     * @OA\Put(
+     *      path="/tenaga-kerjas/{id}",
+     *      summary="updateTenagaKerja",
+     *      tags={"TenagaKerja"},
+     *      description="Update TenagaKerja",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of TenagaKerja",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/TenagaKerja")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/TenagaKerja"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateTenagaKerjaAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class TenagaKerjaAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified TenagaKerja from storage.
-     * DELETE /tenaga-kerjas/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/tenaga-kerjas/{id}",
+     *      summary="deleteTenagaKerja",
+     *      tags={"TenagaKerja"},
+     *      description="Delete TenagaKerja",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of TenagaKerja",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {

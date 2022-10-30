@@ -12,8 +12,7 @@ class InflasiKotaRepository extends BaseRepository
         'mtom',
         'ytod',
         'ytoy',
-        'total',
-        'created'
+        'total'
     ];
 
     public function getFieldsSearchable(): array

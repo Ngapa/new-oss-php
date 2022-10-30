@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('pr');
             $table->integer('total');
             $table->integer('rasio_jk');
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('p1')->nullable();
             $table->float('p2')->nullable();
             $table->float('gk')->nullable();
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

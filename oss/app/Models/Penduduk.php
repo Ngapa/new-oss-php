@@ -3,10 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Penduduk extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="Penduduk",
+ *      required={"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","total"},
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class Penduduk extends Model
 {
-    public $table = 'penduduk';
+    use HasFactory;    public $table = 'penduduk';
 
     public $fillable = [
         'a',
@@ -25,12 +46,11 @@ class Penduduk extends Model
         'n',
         'o',
         'p',
-        'total',
-        'created'
+        'total'
     ];
 
     protected $casts = [
-        'created' => 'date'
+        
     ];
 
     public static $rules = [
@@ -51,7 +71,8 @@ class Penduduk extends Model
         'o' => 'required',
         'p' => 'required',
         'total' => 'required',
-        'created' => 'required'
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     

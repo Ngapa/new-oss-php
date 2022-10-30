@@ -3,10 +3,31 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Inflasi extends Model
+ use Illuminate\Database\Eloquent\Factories\HasFactory;;
+/**
+ * @OA\Schema(
+ *      schema="Inflasi",
+ *      required={"kategori_id"},
+ *      @OA\Property(
+ *          property="created_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          description="",
+ *          readOnly=true,
+ *          nullable=true,
+ *          type="string",
+ *          format="date-time"
+ *      )
+ * )
+ */class Inflasi extends Model
 {
-    public $table = 'inflasi';
+    use HasFactory;    public $table = 'inflasi';
 
     public $fillable = [
         'kategori_id',
@@ -21,12 +42,11 @@ class Inflasi extends Model
         'pendidikan',
         'penyedia_pangan',
         'perawatan_pribadi',
-        'total_inflasi',
-        'created'
+        'total_inflasi'
     ];
 
     protected $casts = [
-        'created' => 'date'
+        
     ];
 
     public static $rules = [
@@ -43,7 +63,8 @@ class Inflasi extends Model
         'penyedia_pangan' => 'nullable',
         'perawatan_pribadi' => 'nullable',
         'total_inflasi' => 'nullable',
-        'created' => 'required'
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable'
     ];
 
     public function kategori(): \Illuminate\Database\Eloquent\Relations\BelongsTo

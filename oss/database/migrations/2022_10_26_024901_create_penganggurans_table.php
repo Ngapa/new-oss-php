@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->float('tpak')->nullable();
             $table->float('tpt')->nullable();
-            $table->date('created');
+            $table->timestamps();
         });
     }
 

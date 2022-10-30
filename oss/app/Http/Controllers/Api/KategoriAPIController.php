@@ -11,8 +11,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 
 /**
- * Class KategoriAPIController
+ * Class KategoriController
  */
+
 class KategoriAPIController extends AppBaseController
 {
     private KategoriRepository $kategoriRepository;
@@ -23,8 +24,32 @@ class KategoriAPIController extends AppBaseController
     }
 
     /**
-     * Display a listing of the Kategoris.
-     * GET|HEAD /kategoris
+     * @OA\Get(
+     *      path="/kategoris",
+     *      summary="getKategoriList",
+     *      tags={"Kategori"},
+     *      description="Get all Kategoris",
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="array",
+     *                  @OA\Items(ref="#/components/schemas/Kategori")
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -38,8 +63,35 @@ class KategoriAPIController extends AppBaseController
     }
 
     /**
-     * Store a newly created Kategori in storage.
-     * POST /kategoris
+     * @OA\Post(
+     *      path="/kategoris",
+     *      summary="createKategori",
+     *      tags={"Kategori"},
+     *      description="Create Kategori",
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Kategori")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Kategori"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function store(CreateKategoriAPIRequest $request): JsonResponse
     {
@@ -51,8 +103,40 @@ class KategoriAPIController extends AppBaseController
     }
 
     /**
-     * Display the specified Kategori.
-     * GET|HEAD /kategoris/{id}
+     * @OA\Get(
+     *      path="/kategoris/{id}",
+     *      summary="getKategoriItem",
+     *      tags={"Kategori"},
+     *      description="Get Kategori",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Kategori",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Kategori"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function show($id): JsonResponse
     {
@@ -67,8 +151,44 @@ class KategoriAPIController extends AppBaseController
     }
 
     /**
-     * Update the specified Kategori in storage.
-     * PUT/PATCH /kategoris/{id}
+     * @OA\Put(
+     *      path="/kategoris/{id}",
+     *      summary="updateKategori",
+     *      tags={"Kategori"},
+     *      description="Update Kategori",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Kategori",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(ref="#/components/schemas/Kategori")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  ref="#/components/schemas/Kategori"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function update($id, UpdateKategoriAPIRequest $request): JsonResponse
     {
@@ -87,10 +207,40 @@ class KategoriAPIController extends AppBaseController
     }
 
     /**
-     * Remove the specified Kategori from storage.
-     * DELETE /kategoris/{id}
-     *
-     * @throws \Exception
+     * @OA\Delete(
+     *      path="/kategoris/{id}",
+     *      summary="deleteKategori",
+     *      tags={"Kategori"},
+     *      description="Delete Kategori",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="id of Kategori",
+     *           @OA\Schema(
+     *             type="integer"
+     *          ),
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @OA\Property(
+     *                  property="data",
+     *                  type="string"
+     *              ),
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
      */
     public function destroy($id): JsonResponse
     {
